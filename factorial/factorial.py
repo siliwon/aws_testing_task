@@ -8,7 +8,7 @@ class Factorial:
         self.number = user_number
         
     def get_factorial(self):
-        """The interface for calculating the factorial"""
+        """The method for calculating the factorial"""
         if isinstance(self.number, (int, str)):
             try:
                 self.number = int(self.number)
@@ -39,6 +39,6 @@ class Factorial:
 
 
 if __name__ == "__main__":
-    user_input = input("Enter your integer: ")
+    user_input = input("Enter your integer please: ")
     factorial = Factorial(user_input)
     print(factorial.get_factorial())
