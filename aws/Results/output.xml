@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0 (Python 3.9.7 on linux)" generated="20220426 13:00:25.369" rpa="false" schemaversion="3">
+<suite id="s1" name="Aws Test Suite" source="/home/siamen_silivonchyk/Code/aws_testing_task/aws/aws_test_suite.robot">
+<test id="s1-t1" name="Check S3 Bucket ServerSide Encryption" line="7">
+<kw name="Check Encryption" library="s3bucket">
+<var>${encryption}</var>
+<arg>${ADMIN_CREDS}</arg>
+<arg>${BUCKET}</arg>
+<msg timestamp="20220426 13:00:25.798" level="INFO">${encryption} = True</msg>
+<status status="PASS" starttime="20220426 13:00:25.468" endtime="20220426 13:00:25.798"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${encryption}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20220426 13:00:25.799" endtime="20220426 13:00:25.801"/>
+</kw>
+<status status="PASS" starttime="20220426 13:00:25.468" endtime="20220426 13:00:25.801"/>
+</test>
+<test id="s1-t2" name="Check S3 Bucket Encryption Deleting Constraints" line="12">
+<kw name="Run Keyword And Expect Error" library="BuiltIn">
+<arg>ClientError:*</arg>
+<arg>Check Encryption Deleting</arg>
+<arg>${READ_ONLY_CREDS}</arg>
+<arg>${BUCKET}</arg>
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<kw name="Check Encryption Deleting" library="s3bucket">
+<arg>${READ_ONLY_CREDS}</arg>
+<arg>${BUCKET}</arg>
+<msg timestamp="20220426 13:00:26.070" level="FAIL">ClientError: An error occurred (AccessDenied) when calling the DeleteBucketEncryption operation: Access Denied</msg>
+<status status="FAIL" starttime="20220426 13:00:25.805" endtime="20220426 13:00:26.072"/>
+</kw>
+<status status="PASS" starttime="20220426 13:00:25.804" endtime="20220426 13:00:26.073"/>
+</kw>
+<kw name="Run Keyword And Expect Error" library="BuiltIn">
+<arg>ClientError:*</arg>
+<arg>Check Encryption Deleting</arg>
+<arg>${WITHOUT_ROLES_CREDS}</arg>
+<arg>${BUCKET}</arg>
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<kw name="Check Encryption Deleting" library="s3bucket">
+<arg>${WITHOUT_ROLES_CREDS}</arg>
+<arg>${BUCKET}</arg>
+<msg timestamp="20220426 13:00:26.331" level="FAIL">ClientError: An error occurred (AccessDenied) when calling the DeleteBucketEncryption operation: Access Denied</msg>
+<status status="FAIL" starttime="20220426 13:00:26.075" endtime="20220426 13:00:26.332"/>
+</kw>
+<status status="PASS" starttime="20220426 13:00:26.074" endtime="20220426 13:00:26.332"/>
+</kw>
+<status status="PASS" starttime="20220426 13:00:25.802" endtime="20220426 13:00:26.332"/>
+</test>
+<test id="s1-t3" name="Check Test File Presented in S3 Bucket" line="17">
+<kw name="Check File Presented" library="s3bucket">
+<var>${file_presented}</var>
+<arg>${ADMIN_CREDS}</arg>
+<arg>${BUCKET}</arg>
+<arg>${FILE}</arg>
+<msg timestamp="20220426 13:00:26.598" level="INFO">${file_presented} = manual/amazon.txt</msg>
+<status status="PASS" starttime="20220426 13:00:26.333" endtime="20220426 13:00:26.598"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${file_presented}</arg>
+<arg>manual/amazon.txt</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220426 13:00:26.599" endtime="20220426 13:00:26.601"/>
+</kw>
+<kw name="Check File Presented" library="s3bucket">
+<var>${file_presented}</var>
+<arg>${READ_ONLY_CREDS}</arg>
+<arg>${BUCKET}</arg>
+<arg>${FILE}</arg>
+<msg timestamp="20220426 13:00:26.967" level="INFO">${file_presented} = manual/amazon.txt</msg>
+<status status="PASS" starttime="20220426 13:00:26.602" endtime="20220426 13:00:26.967"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${file_presented}</arg>
+<arg>manual/amazon.txt</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220426 13:00:26.968" endtime="20220426 13:00:26.970"/>
+</kw>
+<kw name="Run Keyword And Expect Error" library="BuiltIn">
+<arg>ClientError:*</arg>
+<arg>Check File Presented</arg>
+<arg>${WITHOUT_ROLES_CREDS}</arg>
+<arg>${BUCKET}</arg>
+<arg>${FILE}</arg>
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<kw name="Check File Presented" library="s3bucket">
+<arg>${WITHOUT_ROLES_CREDS}</arg>
+<arg>${BUCKET}</arg>
+<arg>${FILE}</arg>
+<msg timestamp="20220426 13:00:27.333" level="FAIL">ClientError: An error occurred (AccessDenied) when calling the ListObjects operation: Access Denied</msg>
+<status status="FAIL" starttime="20220426 13:00:26.972" endtime="20220426 13:00:27.334"/>
+</kw>
+<status status="PASS" starttime="20220426 13:00:26.971" endtime="20220426 13:00:27.335"/>
+</kw>
+<status status="PASS" starttime="20220426 13:00:26.332" endtime="20220426 13:00:27.335"/>
+</test>
+<status status="PASS" starttime="20220426 13:00:25.370" endtime="20220426 13:00:27.338"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="3" fail="0" skip="0" id="s1" name="Aws Test Suite">Aws Test Suite</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
