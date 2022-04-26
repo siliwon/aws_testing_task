@@ -19,7 +19,7 @@ This is a really simple program for the countdown that corresponds to all the ex
 
 ---
 ## The AWS + Robot Framework task
-The AWS infrastructure was prepared to testing as it described below:
+The AWS infrastructure was prepared for testing as described below:
 1. The IAM-users were created and added to different groups with specific permissions to s3 access: 
     * the `ADMIN` user with full access to s3;
     * the `READ-ONLY` user with Read-Only access to s3;
